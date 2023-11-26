@@ -24,11 +24,15 @@ class _MasterPageState extends State<MasterPage> {
       'Cart Page',
     ),
   ];
+  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Color.fromARGB(255, 72, 28, 28),
       bottomNavigationBar: CurvedNavigationBar(
+        key: _bottomNavigationKey,
         backgroundColor: const Color.fromARGB(255, 255, 68, 224),
         items: <Widget>[
           Icon(Icons.home, size: 30),
@@ -36,7 +40,8 @@ class _MasterPageState extends State<MasterPage> {
           Icon(Icons.person, size: 30),
         ],
         onTap: (index) {
-          //Handle button tap
+          _selectedIndex = index;
+          setState(() {});
         },
       ),
     );
