@@ -17,7 +17,7 @@ class _ShopState extends State<Shop> {
           child: ListView(padding: EdgeInsets.zero, children: [
             Container(
               decoration: BoxDecoration(
-                  color: Colors.black12,
+                  color: Color.fromARGB(31, 255, 255, 255),
                   borderRadius: const BorderRadius.only(
                       bottomRight: Radius.circular(50))),
               child: Column(children: [

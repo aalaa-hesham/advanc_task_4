@@ -26,7 +26,7 @@ class _MasterPageState extends State<MasterPage> {
       ),
     )
   ];
-  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  // GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _MasterPageState extends State<MasterPage> {
         index: _selectedIndex,
         backgroundColor: Color.fromARGB(255, 72, 28, 28),
         color: Colors.brown.shade600,
-        animationDuration: Duration(microseconds: 300),
+        //animationDuration: Duration(microseconds: 300),
         items: <Widget>[
           Icon(
             Icons.home,
