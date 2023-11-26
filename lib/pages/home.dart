@@ -1,56 +1,77 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+  const Homepage({Key? key}) : super(key: key);
 
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
-   final myitems = [
-    Image.asset('assets/1.jpg'),
-    Image.asset('assets/images (1).jfif'),
-    Image.asset('assets/images.jfif'),
+  List<String> imagePathList = [
+    'assets/1.jpg',
+    'assets/images (1).jfif',
+    'assets/images.jfif',
   ];
   late CarouselController car = CarouselController();
-  int current =0;
+  int current = 0;
+
   @override
   Widget build(BuildContext context) {
-    return 
-      Column(
-            children: [
-              CarouselSlider(
-                options: CarouselOptions(
-                  autoPlay: true,
-                  height: 200,
-                  autoPlayCurve: Curves.fastOutSlowIn,
-               //   autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                  autoPlayInterval: const Duration(seconds: 2),
-                  enlargeCenterPage: true,
-                  aspectRatio: 2.0,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      current = index;
-                    });
-                  },
-                ),
-                items: myitems,
-              ),
-              AnimatedSmoothIndicator(activeIndex: current,
-              count: myitems.length,
-              effect: WormEffect(
-                dotHeight: 8,
-                dotWidth: 8,
-                spacing: 10,
-                dotColor: Colors.grey.shade200,
-                activeDotColor: const Color.fromARGB(255, 222, 109, 109),
-                paintStyle: PaintingStyle.fill,
-              ),)
-            ],
-          );
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 150,
+        ),
+        CarouselSlider(
+          options: CarouselOptions(
+            height:
+                200, // Adjust the height of the carousel as per your requirement
+            autoPlay: true, // Enable auto play of the carousel
+            enlargeCenterPage: true, // Increase the size of the center image
+            aspectRatio: 16 / 9, // Adjust the aspect ratio of the images
+            autoPlayCurve:
+                Curves.fastOutSlowIn, // Animation curve for auto play
+            autoPlayInterval:
+                Duration(seconds: 3), // Interval between each auto play slide
+            autoPlayAnimationDuration:
+                Duration(milliseconds: 800), // Animation duration for auto play
+          ),
+          items: imagePathList.map((imagePath) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                  width: 300,
+                  margin: EdgeInsets.symmetric(
+                      horizontal: 1.0), // Adjust the horizontal margin
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 76, 3,
+                        3), // Set a background color for the image container
+                  ),
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.contain,
+                  ),
+                );
+              },
+            );
+          }).toList(),
+        ),
+        DotsIndicator(
+          dotsCount: 5,
+          position: current,
+          decorator: DotsDecorator(
+            size: const Size.square(7.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+          ),
+        )
+      ],
+    );
   }
 }
